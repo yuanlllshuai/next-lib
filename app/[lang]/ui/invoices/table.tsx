@@ -4,13 +4,16 @@ import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
+import { Lang } from '@/app/i18N';
 
 export default async function InvoicesTable({
   query,
   currentPage,
+  lang
 }: {
   query: string;
   currentPage: number;
+  lang: Lang
 }) {
   const invoices = await fetchFilteredInvoices(query, currentPage);
 
@@ -85,7 +88,7 @@ export default async function InvoicesTable({
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <Link href={`/dashboard/phone/${invoice.image_url.match(/([^/]+)$/)?.[1]}`}>
+                    <Link href={`/${lang}/dashboard/photo/${invoice.image_url.match(/([^/]+)$/)?.[1]}`}>
                       <div className="flex items-center gap-3">
                         <Image
                           src={invoice.image_url}
