@@ -7,6 +7,7 @@ import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
 import { Metadata } from 'next';
+import I18N, { Lang } from '@/app/i18N';
 
 export const metadata: Metadata = {
     title: 'Invoices',
@@ -14,20 +15,25 @@ export const metadata: Metadata = {
 
 export default async function Page({
     searchParams,
+    params
 }: {
     searchParams?: {
         query?: string;
         page?: string;
-    };
+    },
+    params: {
+        lang: Lang
+    }
 }) {
     const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchInvoicesPages(query);
+    const t = await I18N(params.lang)
 
     return (
         <div className="w-full">
             <div className="flex w-full items-center justify-between">
-                <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
+                <h1 className={`${lusitana.className} text-2xl`}>{t.dashboard.invoices.invoices}</h1>
             </div>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Search invoices..." />
