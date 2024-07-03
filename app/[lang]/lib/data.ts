@@ -10,6 +10,9 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
+import {
+  experimental_taintObjectReference,
+} from 'react'
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -116,6 +119,10 @@ export async function fetchFilteredInvoices(
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
+    // experimental_taintObjectReference(
+    //   'Do not pass the whole user object to the client',
+    //   invoices
+    // )
     return invoices.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -137,6 +144,7 @@ export async function fetchInvoicesPages(query: string) {
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);

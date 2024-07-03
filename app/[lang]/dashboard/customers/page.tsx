@@ -1,5 +1,9 @@
+import Out from './components/Out'
+import Innder from './components/Innder'
 const Index = () => (
-    <div>children</div>
+    <div>
+        <Out><Innder /></Out>
+    </div>
 )
 
 export default Index
