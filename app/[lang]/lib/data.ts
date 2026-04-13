@@ -10,9 +10,9 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
-import {
-  experimental_taintObjectReference,
-} from 'react'
+// import {
+//   experimental_taintObjectReference,
+// } from 'react'
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.

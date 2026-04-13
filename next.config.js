@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-        optimizePackageImports: ['antd'],
-    },
+  reactStrictMode: false,
+  experimental: {
+      optimizePackageImports: ['antd'],
+  },
 };
 
 module.exports = nextConfig;
