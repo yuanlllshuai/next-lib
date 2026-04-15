@@ -17,6 +17,22 @@ import * as z from 'zod';
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
+  const test = async () => {
+    const conversation = [
+      {
+        role: 'system',
+        content:
+          'You are a helpful assistant that translates English to Simplified Chinese.',
+      },
+      { role: 'user', content: 'Translate: I love programming.' },
+      // { role: 'assistant', content: "J'adore la programmation." },
+      // { role: 'user', content: 'Translate: I love building applications.' },
+    ];
+
+    const response = await model.invoke(conversation);
+    console.log(response);
+  };
+
   const getData = async () => {
     const systemPrompt = `You are an expert weather forecaster, who speaks in puns.
 
@@ -161,6 +177,7 @@ If a user asks you for the weather, make sure you know the location. If you can 
         </div>
       </form>
       <Button onClick={getData}>Get</Button>
+      <Button onClick={test}>Test</Button>
     </>
   );
 }
